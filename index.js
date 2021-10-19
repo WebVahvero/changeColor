@@ -1,5 +1,7 @@
+// Generating random number
 const randNum = () => Math.floor(Math.random() * 255);
 
+// Converting two digit values to character
 const hexNum2Letter = num => {
     switch (num) {
         case 10:
@@ -19,39 +21,42 @@ const hexNum2Letter = num => {
     }
 }
 
-const rbg2hex = () => {
-    const rbgValue = randNum();
-    const digit = rbgValue / 16;
-    const remainder = digit - Math.floor(digit);
-    const multiplyedRemaider = remainder * 16;
-    const floorDigit = Math.floor(digit);
 
-    if (floorDigit > 9 && multiplyedRemaider > 9) {
+// Function that converts rbg values to numeric hex values
+const rbg2hex = () => {
+    const digit = randNum() / 16;
+    const floorDigit = Math.floor(digit);
+    const remainder = (digit - floorDigit) * 16;
+
+    //´Checking if the value is bigger than nine, and if it is then calling the function that converts value to character
+    if (floorDigit > 9 && remainder > 9) {
         const firstChar = hexNum2Letter(Math.floor(digit));
-        const secondChar = hexNum2Letter(Math.floor(multiplyedRemaider));
+        const secondChar = hexNum2Letter(Math.floor(remainder));
         return firstChar.concat(secondChar);
-    } else if (floorDigit > 9 && multiplyedRemaider <= 9) {
+    } else if (floorDigit > 9 && remainder <= 9) {
         const firstChar = hexNum2Letter(Math.floor(digit));
-        return firstChar.concat(multiplyedRemaider)
-    } else if (floorDigit <= 9 && multiplyedRemaider > 9) {
-        const secondChar = hexNum2Letter(Math.floor(multiplyedRemaider));
+        return firstChar.concat(remainder)
+    } else if (floorDigit <= 9 && remainder > 9) {
+        const secondChar = hexNum2Letter(Math.floor(remainder));
         let stringDigit = floorDigit.toString();
         return stringDigit.concat(secondChar);
     } else {
         let stringDigit = floorDigit.toString();
-        let stringRemainde = multiplyedRemaider.toString();
+        let stringRemainde = remainder.toString();
         return stringDigit.concat(stringRemainde);
     }
 }
 
+// Concatting red, blue and green values and returning it as a string
 const hex = () => {
     const red = rbg2hex();
     const blue = rbg2hex();
     const green = rbg2hex();
-
     return `#${red}${green}${blue}`;
 }
 
+
+// DOM function that changes the color and sends hex to button
 const changeColor = () => {
     let color = hex();
     const elem = document.getElementById('body');
