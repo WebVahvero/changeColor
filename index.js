@@ -60,5 +60,3 @@ const changeColor = () => {
     const p = document.getElementById('para');
     p.innerHTML = color;
 }
-
-console.log(hex())
