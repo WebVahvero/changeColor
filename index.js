@@ -21,7 +21,6 @@ const hexNum2Letter = num => {
     }
 }
 
-
 // Function that converts rbg values to numeric hex values
 const rbg2hex = () => {
     const digit = randNum() / 16;
@@ -54,7 +53,6 @@ const hex = () => {
     const green = rbg2hex();
     return `#${red}${green}${blue}`;
 }
-
 
 // DOM function that changes the color and sends hex to button
 const changeColor = () => {
